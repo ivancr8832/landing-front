@@ -1,0 +1,32 @@
+.fs-7 {
+  font-size: 0.8rem;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.fa-facebook:hover {
+  color: #2374E1;
+  transform: scale(1.3);
+}
+
+.fa-tiktok:hover{
+  transform: scale(1.3);
+}
+
+.fa-youtube:hover{
+  color: #FF0000;
+  transform: scale(1.3);
+}
+
+.fa-instagram {
+  background-clip: text;
+  -webkit-text-fill-color: black;
+}
+
+.fa-instagram:hover {
+  background-image: linear-gradient(to bottom right, #bc2a8d, #e95950);
+  -webkit-text-fill-color: transparent;
+  transform: scale(1.3);
+}

@@ -1,0 +1,21 @@
+<div class="card m-2 card-float-blog">
+  <div class="position-relative">
+    <div class="w-25 h-auto text-center pt-2 position-absolute top-0 start-0 rounded-start text-light" style="background-color: #0771A9;">
+      <strong>{{ cardInformation.day }}</strong>
+      <p>{{ cardInformation.month }}</p>
+    </div>
+  </div>
+  <img
+    [src]="cardInformation.imageUrl"
+    class="card-img-top"
+    [alt]="cardInformation.altImage"
+  >
+  <div class="card-body text-center">
+    <h2 class="card-title">{{ cardInformation.title }}</h2>
+    <p class="card-text">{{ cardInformation.subtitle }}</p>
+    <div class="d-flex justify-content-center align-items-center">
+      <span>Read More</span>
+      <i class="fa fa-long-arrow-right ps-2" aria-hidden="true"></i>
+    </div>
+  </div>
+</div>

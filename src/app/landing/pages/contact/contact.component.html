@@ -1,0 +1,85 @@
+<div class="container-fluid">
+  <div class="row h-100">
+    <div class="col-6 d-flex justify-content-center align-items-center">
+      <div class="card bg-light animate__animated animate__fadeInDown">
+        <div class="card-body p-4 rounded-3">
+          <h1 class="card-title text-center">Contactanos</h1>
+          <p class="fs-5 text-center">Ingresa la información necesaria para poder comunicarnos contigo</p>
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <mat-form-field class="w-100">
+              <mat-label>Nombre</mat-label>
+              <input formControlName="name" matInput placeholder="Jhon">
+              <mat-error *ngIf="isValidField('name')">
+                {{ getErrorMessage('name') }}
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Apellido</mat-label>
+              <input formControlName="lastName" matInput placeholder="Doe">
+              <mat-error *ngIf="isValidField('lastName')">
+                {{ getErrorMessage('lastName') }}
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Email</mat-label>
+              <input formControlName="email" matInput placeholder="example@example.com">
+              <mat-error *ngIf="isValidField('email')">
+                {{ getErrorMessage('email') }}
+              </mat-error>
+            </mat-form-field>
+            <div class="row">
+              <div class="col-4">
+                <mat-form-field class="w-100">
+                  <mat-label>País</mat-label>
+                  <mat-select formControlName="codeCountryPhone">
+                    <mat-option *ngFor="let country of countries" [value]="country.phoneCode">
+                      <img [src]="country.flagImage" width="20" height="10" [alt]="country.name">
+                      {{ country.name }}
+                      <strong style="font-size: 12px;">{{ country.phoneCode }}</strong>
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-8">
+                <mat-form-field class="w-100">
+                  <mat-label>Teléfono</mat-label>
+                  <input formControlName="phone" matInput maxlength="10" onlyNumbers placeholder="999999999">
+                  <mat-error *ngIf="isValidField('phone')">
+                    {{ getErrorMessage('phone') }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <mat-form-field class="w-100">
+              <mat-label>Asunto</mat-label>
+              <input formControlName="subject" matInput>
+              <mat-error *ngIf="isValidField('subject')">
+                {{ getErrorMessage('subject') }}
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Tu mensaje</mat-label>
+              <textarea formControlName="comment" #comment rows="5" maxlength="250" matInput></textarea>
+              <mat-hint align="end">{{comment.value.length}} / 250</mat-hint>
+              <mat-error *ngIf="isValidField('comment')">
+                {{ getErrorMessage('comment') }}
+              </mat-error>
+            </mat-form-field>
+            <div class="d-grid gap-2">
+              <button mat-raised-button color="primary" type="submit" [disabled]="!contactForm.valid" *ngIf="!isSaving">Enviar</button>
+            </div>
+            <div class="alert alert-info d-flex align-items-center" *ngIf="isSaving">
+              <div class="spinner-grow text-info">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <div class="fs-6 ms-1">
+                Enviando, espere por favor...
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,29 @@
+<div class="container-fluid mt-2 pt-2">
+  <div class="row">
+    <div class="col-10">
+      <h1 class="text-center">You new and information</h1>
+      <p class="text-center px-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum totam nam adipisci labore. Necessitatibus ullam corporis ex totam repellendus, velit in asperiores odio aperiam tempora, voluptatem laboriosam labore sint sed.</p>
+      <div class="d-flex justify-content-center flex-wrap">
+        <blog-card
+          class="animate__animated animate__fadeIn"
+          *ngFor="let blog of blogs"
+          [cardInformation]="blog"
+        />
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="d-flex" style="height: 100vh;">
+        <div class="vr me-4"></div>
+        <div class="w-100">
+          <h2 class="text-center">Categorias</h2>
+          <div class="accordion" id="accordionCategories">
+            <blog-categories
+              *ngFor="let categorie of categories"
+              [categorie]="categorie"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

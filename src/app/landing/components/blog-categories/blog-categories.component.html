@@ -1,0 +1,27 @@
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button class="accordion-button"
+      type="button"
+      data-bs-toggle="collapse"
+      [attr.data-bs-target]="'#' + categorie.id"
+      [attr.aria-expanded]="categorie.ariaExpanded"
+      [attr.aria-controls]="categorie.id"
+    >
+      {{ categorie.name }}
+    </button>
+  </h2>
+  <div
+    [id]="categorie.id"
+    class="accordion-collapse collapse"
+    [ngClass]="{'show': categorie.ariaExpanded}"
+    data-bs-parent="#accordionCategories"
+  >
+    <div class="accordion-body">
+      <ul class="list-group list-group-flush">
+        <li *ngFor="let item of categorie.years" class="list-group-item list-group-item-action">
+          {{ item.year }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

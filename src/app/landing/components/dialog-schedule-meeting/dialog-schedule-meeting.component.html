@@ -1,0 +1,84 @@
+<div class="contianer p-3">
+  <h1>Programa tu cita</h1>
+  <form [formGroup]="formSchedule" (ngSubmit)="onSubmit()" autocomplete="off">
+    <mat-form-field class="w-100">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name" placeholder="Jhon">
+      <mat-error *ngIf="isValidField('name')">
+        {{ getErrorMessage('name') }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Apellido</mat-label>
+      <input matInput formControlName="lastName" placeholder="Doe">
+      <mat-error *ngIf="isValidField('lastName')">
+        {{ getErrorMessage('lastName') }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Email</mat-label>
+      <input type="email" formControlName="email" matInput placeholder="example@example.com">
+      <mat-error *ngIf="isValidField('email')">
+        {{ getErrorMessage('email') }}
+      </mat-error>
+    </mat-form-field>
+    <div class="row">
+      <div class="col-4">
+        <mat-form-field>
+          <mat-label>País</mat-label>
+          <mat-select formControlName="codeCountryPhone">
+            <mat-option *ngFor="let country of countries" [value]="country.phoneCode">
+              <img [src]="country.flagImage" width="20" height="10" [alt]="country.name">
+              {{ country.name }}
+              <strong style="font-size: 12px;">{{ country.phoneCode }}</strong>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-8">
+        <mat-form-field class="w-100">
+          <mat-label>Teléfono</mat-label>
+          <input type="tel" formControlName="phoneNumber" maxlength="10" matInput onlyNumbers placeholder="999999999">
+          <mat-error *ngIf="isValidField('phoneNumber')">
+            {{ getErrorMessage('phoneNumber') }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-form-field class="w-100" *ngIf="putAddressField">
+      <mat-label>Dirección</mat-label>
+      <textarea matInput formControlName="address" placeholder="Ej. Av. Ejemplo 34, quito"></textarea>
+      <mat-error *ngIf="isValidField('address')">
+        {{ getErrorMessage('address') }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Fecha</mat-label>
+      <input formControlName="date" matInput [min]="minDate" [matDatepicker]="picker" readonly="true">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="isValidField('date')">
+        {{ getErrorMessage('date') }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Hora</mat-label>
+      <input type="time" formControlName="hour" matInput>
+      <mat-error *ngIf="isValidField('hour')">
+        {{ getErrorMessage('hour') }}
+      </mat-error>
+    </mat-form-field>
+    <div class="d-flex justify-content-center">
+      <button type="submit" *ngIf="!isSaving" mat-raised-button color="primary" class="me-2" [disabled]="!formSchedule.valid">Guardar</button>
+      <button type="button" *ngIf="!isSaving" mat-raised-button (click)="onCancel()">Cancelar</button>
+      <div class="alert alert-info d-flex align-items-center" *ngIf="isSaving">
+        <div class="spinner-grow text-info">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="fs-6 ms-1">
+          Guardando, espere por favor...
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
