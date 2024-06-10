@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CardBlog } from '../../interfaces';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'blog-card',
@@ -8,4 +9,10 @@ import { CardBlog } from '../../interfaces';
 })
 export class BlogCardComponent {
   @Input() cardInformation!: CardBlog;
+
+  private router = inject(Router);
+
+  public blogSelectedHandler(idBlog: number) {
+    this.router.navigateByUrl(`/blog/${idBlog}`);
+  }
 }

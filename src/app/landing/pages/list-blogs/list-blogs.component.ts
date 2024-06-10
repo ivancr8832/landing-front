@@ -7,80 +7,49 @@ import { BlogService } from '../../../services';
   styleUrls: ['./list-blogs.component.css']
 })
 export class ListBlogsComponent implements OnInit {
-  //TODO: BORRAR SOLO PARA PRUEBA
-  public blogs: CardBlog [] = [
-    {
-      day: 20,
-      month: 'February',
-      altImage: 'goku',
-      imageUrl: 'https://elcomercio.pe/resizer/-ff-6d9vg7CILcQh-WvejY7_3lQ=/1200x1200/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/6FUBT6XQXNHHNFOMCHIT7I34NA.jpg',
-      title: 'Card title',
-      subtitle: "Some quick example text to build on the card title and make up the bulk of the card's content."
-    },
-    {
-      day: 20,
-      month: 'February',
-      altImage: 'goku',
-      imageUrl: 'https://elcomercio.pe/resizer/-ff-6d9vg7CILcQh-WvejY7_3lQ=/1200x1200/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/6FUBT6XQXNHHNFOMCHIT7I34NA.jpg',
-      title: 'Card title',
-      subtitle: "Some quick example text to build on the card title and make up the bulk of the card's content."
-    },
-    {
-      day: 20,
-      month: 'February',
-      altImage: 'goku',
-      imageUrl: 'https://elcomercio.pe/resizer/-ff-6d9vg7CILcQh-WvejY7_3lQ=/1200x1200/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/6FUBT6XQXNHHNFOMCHIT7I34NA.jpg',
-      title: 'Card title',
-      subtitle: "Some quick example text to build on the card title and make up the bulk of the card's content."
-    },
-    {
-      day: 20,
-      month: 'February',
-      altImage: 'goku',
-      imageUrl: 'https://elcomercio.pe/resizer/-ff-6d9vg7CILcQh-WvejY7_3lQ=/1200x1200/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/6FUBT6XQXNHHNFOMCHIT7I34NA.jpg',
-      title: 'Card title',
-      subtitle: "Some quick example text to build on the card title and make up the bulk of the card's content."
-    },
-    {
-      day: 20,
-      month: 'February',
-      altImage: 'goku',
-      imageUrl: 'https://elcomercio.pe/resizer/-ff-6d9vg7CILcQh-WvejY7_3lQ=/1200x1200/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/6FUBT6XQXNHHNFOMCHIT7I34NA.jpg',
-      title: 'Card title',
-      subtitle: "Some quick example text to build on the card title and make up the bulk of the card's content."
-    },
-    {
-      day: 20,
-      month: 'February',
-      altImage: 'goku',
-      imageUrl: 'https://elcomercio.pe/resizer/-ff-6d9vg7CILcQh-WvejY7_3lQ=/1200x1200/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/6FUBT6XQXNHHNFOMCHIT7I34NA.jpg',
-      title: 'Card title',
-      subtitle: "Some quick example text to build on the card title and make up the bulk of the card's content."
-    },
-    {
-      day: 20,
-      month: 'February',
-      altImage: 'goku',
-      imageUrl: 'https://elcomercio.pe/resizer/-ff-6d9vg7CILcQh-WvejY7_3lQ=/1200x1200/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/6FUBT6XQXNHHNFOMCHIT7I34NA.jpg',
-      title: 'Card title',
-      subtitle: "Some quick example text to build on the card title and make up the bulk of the card's content."
-    },
-    {
-      day: 20,
-      month: 'February',
-      altImage: 'goku',
-      imageUrl: 'https://elcomercio.pe/resizer/-ff-6d9vg7CILcQh-WvejY7_3lQ=/1200x1200/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/6FUBT6XQXNHHNFOMCHIT7I34NA.jpg',
-      title: 'Card title',
-      subtitle: "Some quick example text to build on the card title and make up the bulk of the card's content."
-    },
-  ]
-
   private blogServices = inject( BlogService );
+
+  public page: number = 1;
+  public pageSize: number = 8;
+  public totalRecords: number = 0;
+  public totalPage!: number;
+
+  public blogs: CardBlog [] = [];
   public categories: Categories[] = [];
+  public categorieIdSelected!: number;
+  public yearSelected!: number;
 
   ngOnInit(): void {
     this.blogServices.getCategories().subscribe(categories => {
       this.categories = categories;
-    })
+      const { years, id } = categories[0];
+
+      this.categorieIdSelected = id;
+      this.yearSelected = years[0];
+      this.getBlogs();
+    });
+  }
+
+  public obtainNewBlogs({categorieId, year}: { year: number, categorieId: number }) {
+    this.blogs = [];
+    this.page = 1;
+    this.categorieIdSelected = categorieId;
+    this.yearSelected = year;
+    this.getBlogs();
+  }
+
+  public handlePageChange(event: any) {
+    this.page = event;
+    this.getBlogs()
+  }
+
+  private getBlogs() {
+    this.blogServices.getBlogs(this.yearSelected, this.categorieIdSelected, this.page, this.pageSize)
+      .subscribe(({ page, totalRecords, blogs, totalPage }) => {
+        this.totalRecords = totalRecords;
+        this.page = page;
+        this.totalPage = totalPage;
+        this.blogs = blogs;
+    });
   }
 }

@@ -6,8 +6,9 @@ import { ScheduleMeetingValidatorsService } from '../../validators/schedule-meet
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackConfirmationComponent } from '../../components/snack-confirmation/snack-confirmation.component';
 import { ContactService } from '../../../services';
-import { Message } from '../../interfaces';
 import { StatusResponse } from 'src/app/shared/enums/status-response';
+import { TYPE_CONTACT } from 'src/app/shared/enums/common';
+import { ContactInformation } from '../../interfaces';
 
 @Component({
   templateUrl: './contact.component.html',
@@ -53,22 +54,23 @@ export class ContactComponent implements OnInit {
     const { name, lastName, email, codeCountryPhone, phone, subject, comment } = this.contactForm.value;
     const cellphone = phone[0] == "0" ? phone.slice(1, phone.lenght) : phone;
 
-    const data: Message = {
+    const data: ContactInformation = {
       name,
       lastName,
       email,
-      cellphone: `${codeCountryPhone}${cellphone}`,
-      comment,
-      subject
+      phone: `${codeCountryPhone}${cellphone}`,
+      message: comment,
+      subject,
+      typeContact: TYPE_CONTACT.MESSAGE
     };
 
-    this.contactService.saveContact(data).subscribe(resp => {
+    this.contactService.saveContact(data).subscribe(({ data, error }) => {
       this.isSaving = false;
       this.snackBar.openFromComponent(SnackConfirmationComponent, {
         data: {
-          result: resp.statusResponse === StatusResponse.OK,
-          message: resp.data,
-          icon: (resp.statusResponse === StatusResponse.OK) ? 'fa-solid fa-check' : 'fa-solid fa-xmark'
+          result: (data),
+          message: data,
+          icon: (!error) ? 'fa-solid fa-check' : 'fa-solid fa-xmark'
         },
         duration: 4000,
         panelClass: 'success-snack',

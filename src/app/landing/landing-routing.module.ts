@@ -6,6 +6,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ListBlogsComponent } from './pages/list-blogs/list-blogs.component';
 import { BlogComponent } from './pages/blog/blog.component';
+import { CookiePolicyComponent } from './pages/cookie-policy/cookie-policy.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: 'contact', component: ContactComponent },
       { path: 'blogs', component: ListBlogsComponent },
       { path: 'blog/:id', component: BlogComponent },
+      { path: 'cookie-policy', component: CookiePolicyComponent },
       { path: '**', redirectTo: 'home' }
     ]
   }

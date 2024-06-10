@@ -8,6 +8,7 @@ import { ContactService } from '../../../services';
 import { ContactInformation } from '../../interfaces';
 import * as dayjs from 'dayjs'
 import { StatusResponse } from 'src/app/shared/enums/status-response';
+import { TYPE_CONTACT } from 'src/app/shared/enums/common';
 
 @Component({
   selector: 'dialog-schedule-meeting',
@@ -70,17 +71,18 @@ export class DialogScheduleMeetingComponent implements OnInit {
       lastName,
       email,
       address,
-      cellphone: `${codeCountryPhone}${cellphone}`,
-      dateSchedule: dayjs(date).format("DD/MM/YYYY"),
-      hourSchedule: hour
+      phone: `${codeCountryPhone}${cellphone}`,
+      dateVisit: dayjs(date).format("DD/MM/YYYY"),
+      hour: hour,
+      typeContact: (address) ? TYPE_CONTACT.PRESENTIAL : TYPE_CONTACT.VIRTUAL
     }
 
-    this.contactService.saveScheduleMessage(data).subscribe(res => {
+    this.contactService.saveContact(data).subscribe(({ data, error }) => {
       this.isSaving = false;
       this.dialogRef.close({
-        result: res.statusResponse == StatusResponse.OK,
-        message: res.data,
-        icon: (res.statusResponse == StatusResponse.OK) ? 'fa-solid fa-check' : 'fa-solid fa-xmark'
+        result: (data),
+        message: data,
+        icon: (!error) ? 'fa-solid fa-check' : 'fa-solid fa-xmark'
       });
     });
   }

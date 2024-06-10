@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
 
   private videoService = inject(VideoService)
 
-  public urlVideo!: string;
+  public urlVideo: string = "";
 
   get cardServicesItems(): CardHomeServices [] {
     return cardServicesItems;
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.videoService.getVideoRandom().subscribe(resp => {
-      this.urlVideo = resp.data.urlVideo
+      this.urlVideo = resp.data!.url
     });
   }
 

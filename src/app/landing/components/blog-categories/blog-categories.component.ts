@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Categories } from '../../interfaces';
 
 @Component({
@@ -8,4 +8,9 @@ import { Categories } from '../../interfaces';
 })
 export class BlogCategoriesComponent {
   @Input() categorie!: Categories;
+  @Output() categorieSelected: EventEmitter<{ year: number, categorieId: number }> = new EventEmitter();
+
+  public selectedCategorie(categorieId: number, year: number) {
+    this.categorieSelected.emit({ categorieId, year });
+  }
 }

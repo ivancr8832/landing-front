@@ -15,5 +15,5 @@ export interface ImageCarousel {
 
 export interface Video {
   id: number;
-  urlVideo: string;
+  url: string;
 }

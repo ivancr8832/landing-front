@@ -1,1 +1,7 @@
-<p>blog works!</p>
+<div class="container pe-4">
+  <img [src]="blogSelected.imageUrl2" height="500" width="1200" />
+  <div class="mt-2">
+    <h1>{{ blogSelected.title }}</h1>
+    <div [innerHTML]="htmlSeguro"></div>
+  </div>
+</div>

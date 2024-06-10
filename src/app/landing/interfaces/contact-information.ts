@@ -1,14 +1,14 @@
+import { TYPE_CONTACT } from "src/app/shared/enums/common";
+
 export interface ContactInformation {
   name: string;
   lastName: string;
   email: string;
-  cellphone: string;
-  dateSchedule?: string;
+  phone: string;
+  dateVisit?: string;
   address?: string;
-  hourSchedule?: string;
-}
-
-export interface Message extends ContactInformation {
-  subject: string;
-  comment: string;
+  hour?: string;
+  subject?: string;
+  message?: string;
+  typeContact: TYPE_CONTACT;
 }

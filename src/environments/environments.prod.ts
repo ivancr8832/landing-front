@@ -1,3 +1,5 @@
 export const environments = {
-  baseUrl: 'http://localhost:3000' //TODO: CAMBIAR POR EL QUE DA EL SERVIDOR
+  baseUrl: 'https://landingback-production.up.railway.app//api',
+  domainCookies: 'supersegurosec.com',
+  baseUrlFront: 'https://supersegurosec.com'
 }

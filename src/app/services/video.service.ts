@@ -11,6 +11,6 @@ export class VideoService {
   private dataService = inject(DataService);
 
   getVideoRandom(): Observable<ResponseService<Video>>{
-    return this.dataService.get<ResponseService<Video>>('/videos-home');
+    return this.dataService.get<ResponseService<Video>>('/videos');
   }
 }

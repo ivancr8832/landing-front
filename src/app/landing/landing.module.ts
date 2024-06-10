@@ -13,6 +13,8 @@ import { ComponentsModule } from './components/components.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from './angularMaterial/angular-material.module';
 import { SafeUrlPipe } from './pipe/safe-url.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { CookiePolicyComponent } from './pages/cookie-policy/cookie-policy.component';
 
 
 @NgModule({
@@ -24,6 +26,7 @@ import { SafeUrlPipe } from './pipe/safe-url.pipe';
     ListBlogsComponent,
     BlogComponent,
     SafeUrlPipe,
+    CookiePolicyComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +34,8 @@ import { SafeUrlPipe } from './pipe/safe-url.pipe';
     SharedModule,
     ComponentsModule,
     ReactiveFormsModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    NgxPaginationModule
   ]
 })
 export class LandingModule { }

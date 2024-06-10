@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SnackConfirmationComponent } from './snack-confirmation/snack-confirmation.component';
 import { SharedModule } from '../../shared/shared.module';
 import { AngularMaterialModule } from '../angularMaterial/angular-material.module';
+import { TransformMonthPipe } from '../pipe/transform-month.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AngularMaterialModule } from '../angularMaterial/angular-material.modul
     BlogCardComponent,
     BlogCategoriesComponent,
     DialogScheduleMeetingComponent,
-    SnackConfirmationComponent
+    SnackConfirmationComponent,
+    TransformMonthPipe
   ],
   imports: [
     CommonModule,
